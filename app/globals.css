@@ -1,26 +1,143 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* 1) Dile a Tailwind qué colores existen */
+@theme {
+    --color-background: hsl(var(--background));
+    --color-foreground: hsl(var(--foreground));
+
+    --color-card: hsl(var(--card));
+    --color-card-foreground: hsl(var(--card-foreground));
+
+    --color-popover: hsl(var(--popover));
+    --color-popover-foreground: hsl(var(--popover-foreground));
+
+    --color-primary: hsl(var(--primary));
+    --color-primary-foreground: hsl(var(--primary-foreground));
+
+    --color-secondary: hsl(var(--secondary));
+    --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+    --color-muted: hsl(var(--muted));
+    --color-muted-foreground: hsl(var(--muted-foreground));
+
+    --color-accent: hsl(var(--accent));
+    --color-accent-foreground: hsl(var(--accent-foreground));
+
+    --color-destructive: hsl(var(--destructive));
+    --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+    --color-border: hsl(var(--border));
+    --color-input: hsl(var(--input));
+    --color-ring: hsl(var(--ring));
+
+    --color-sidebar: hsl(var(--sidebar-background));
+    --color-sidebar-foreground: hsl(var(--sidebar-foreground));
+    --color-sidebar-primary: hsl(var(--sidebar-primary));
+    --color-sidebar-primary-foreground: hsl(var(--sidebar-primary-foreground));
+    --color-sidebar-accent: hsl(var(--sidebar-accent));
+    --color-sidebar-accent-foreground: hsl(var(--sidebar-accent-foreground));
+    --color-sidebar-border: hsl(var(--sidebar-border));
+    --color-sidebar-ring: hsl(var(--sidebar-ring));
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* 2) Tus variables de diseño (como ya las tenías) */
+@layer base {
+    :root {
+        --background: 0 0% 100%;
+        --foreground: 210 20% 15%;
+
+        --card: 0 0% 100%;
+        --card-foreground: 210 20% 15%;
+
+        --popover: 0 0% 100%;
+        --popover-foreground: 210 20% 15%;
+
+        --primary: 220 90% 56%;
+        --primary-foreground: 0 0% 100%;
+
+        --secondary: 180 85% 70%;
+        --secondary-foreground: 210 20% 15%;
+
+        --muted: 210 25% 96%;
+        --muted-foreground: 210 15% 50%;
+
+        --accent: 48 100% 50%;
+        --accent-foreground: 210 20% 15%;
+
+        --destructive: 0 84% 60%;
+        --destructive-foreground: 0 0% 100%;
+
+        --border: 210 20% 90%;
+        --input: 210 20% 90%;
+        --ring: 220 90% 56%;
+
+        --gradient-primary: linear-gradient(
+            135deg,
+            hsl(220 90% 56%),
+            hsl(180 85% 70%)
+        );
+        --shadow-elegant: 0 10px 30px -10px hsl(220 90% 56% / 0.2);
+        --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+        --radius: 0.5rem;
+
+        --sidebar-background: 0 0% 98%;
+        --sidebar-foreground: 240 5.3% 26.1%;
+        --sidebar-primary: 240 5.9% 10%;
+        --sidebar-primary-foreground: 0 0% 98%;
+        --sidebar-accent: 240 4.8% 95.9%;
+        --sidebar-accent-foreground: 240 5.9% 10%;
+        --sidebar-border: 220 13% 91%;
+        --sidebar-ring: 217.2 91.2% 59.8%;
+    }
+
+    .dark {
+        --background: 210 30% 8%;
+        --foreground: 210 20% 95%;
+
+        --card: 210 25% 12%;
+        --card-foreground: 210 20% 95%;
+
+        --popover: 210 25% 12%;
+        --popover-foreground: 210 20% 95%;
+
+        --primary: 220 90% 60%;
+        --primary-foreground: 0 0% 100%;
+
+        --secondary: 180 85% 75%;
+        --secondary-foreground: 210 20% 15%;
+
+        --muted: 210 25% 18%;
+        --muted-foreground: 210 15% 60%;
+
+        --accent: 48 100% 55%;
+        --accent-foreground: 210 25% 12%;
+
+        --destructive: 0 62% 50%;
+        --destructive-foreground: 0 0% 100%;
+
+        --border: 210 25% 20%;
+        --input: 210 25% 20%;
+        --ring: 220 90% 60%;
+
+        --sidebar-background: 240 5.9% 10%;
+        --sidebar-foreground: 240 4.8% 95.9%;
+        --sidebar-primary: 224.3 76.3% 48%;
+        --sidebar-primary-foreground: 0 0% 100%;
+        --sidebar-accent: 240 3.7% 15.9%;
+        --sidebar-accent-foreground: 240 4.8% 95.9%;
+        --sidebar-border: 240 3.7% 15.9%;
+        --sidebar-ring: 217.2 91.2% 59.8%;
+    }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* 3) Tus @apply usando las utilidades ya definidas por @theme */
+@layer base {
+    * {
+        @apply border-border;
+    }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+    body {
+        @apply bg-background text-foreground;
+    }
 }
