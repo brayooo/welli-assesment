@@ -38,7 +38,7 @@ const RegistrationForm = () => {
 
     if (result.success) {
       toast.success("¡Registro enviado exitosamente!", {
-        description: `¡Bienvenido/a, ${data.fullName}!`,
+        description: `Pronto estaremos en contacto con usted`,
       });
     } else {
       toast.error("Error al enviar el registro", {
