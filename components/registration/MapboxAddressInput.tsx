@@ -35,6 +35,7 @@ const MapboxAddressInput = ({
   useEffect(() => {
     if (map.current || !mapContainer.current) return;
 
+    console.log("Initializing Mapbox with token present:", !!mapboxToken);
     mapboxgl.accessToken = mapboxToken;
 
     map.current = new mapboxgl.Map({
@@ -74,7 +75,24 @@ const MapboxAddressInput = ({
       });
     });
 
+    geocoder.on("loading", () => {
+      console.log("Mapbox Geocoder: Loading...");
+    });
+
+    geocoder.on("results", (e: any) => {
+      console.log("Mapbox Geocoder: Results found", e);
+    });
+
+    geocoder.on("clear", () => {
+      console.log("Mapbox Geocoder: Cleared");
+    });
+
+    geocoder.on("error", (e: any) => {
+      console.error("Mapbox Geocoder Error:", e);
+    });
+
     map.current.on("load", () => {
+      console.log("Mapbox Map Loaded");
       setMapLoaded(true);
       map.current?.resize();
     });
@@ -85,7 +103,7 @@ const MapboxAddressInput = ({
     <div className="space-y-4">
 
 
-      <div className="h-[300px] w-full rounded-lg overflow-hidden border border-border relative">
+      <div className="h-[300px] w-full rounded-lg border border-border relative mapbox-container-custom">
         <div ref={mapContainer} className="h-full w-full" />
         {!mapLoaded && (
           <div className="absolute inset-0 flex items-center justify-center bg-muted/50">

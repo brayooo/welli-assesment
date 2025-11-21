@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-/* 1) Dile a Tailwind qué colores existen */
 @theme {
     --color-background: hsl(var(--background));
     --color-foreground: hsl(var(--foreground));
@@ -40,7 +39,6 @@
     --color-sidebar-ring: hsl(var(--sidebar-ring));
 }
 
-/* 2) Tus variables de diseño (como ya las tenías) */
 @layer base {
     :root {
         --background: 0 0% 100%;
@@ -129,7 +127,6 @@
     }
 }
 
-/* 3) Tus @apply usando las utilidades ya definidas por @theme */
 @layer base {
     * {
         @apply border-border;
@@ -142,50 +139,39 @@
 
 /* Mapbox Geocoder Custom Styles */
 .mapboxgl-ctrl-geocoder {
-    width: 100% !important;
-    max-width: none !important;
-    box-shadow: 0 0 0 1px var(--border) !important;
-    border-radius: var(--radius) !important;
-    background-color: #ffffff !important;
-}
-
-.mapboxgl-ctrl-geocoder--input {
-    height: 2.5rem !important;
-    padding: 0.5rem 2.5rem !important;
-    color: var(--foreground) !important;
-    background-color: #ffffff !important;
-    /* Ensure input itself is white */
+    width: 100%;
+    max-width: none;
+    box-shadow: 0 0 0 1px var(--border);
+    border-radius: var(--radius);
+    background-color: #ffffff;
 }
 
 .mapboxgl-ctrl-geocoder--icon-search {
-    top: 0.5rem !important;
-    left: 0.75rem !important;
-    fill: var(--muted-foreground) !important;
+    top: 0.5rem;
+    left: 0.75rem;
+    fill: var(--muted-foreground);
     z-index: 10;
-    /* Ensure icon is on top */
-}
-
-.suggestions-wrapper {
-    border: 1px solid var(--border);
-    border-top: none;
-    border-radius: 0 0 var(--radius) var(--radius);
-    overflow: hidden;
-    background-color: #ffffff !important;
-    position: absolute;
-    width: 100%;
-    z-index: 50;
-}
-
-.mapboxgl-ctrl-geocoder .suggestions {
-    background-color: #ffffff !important;
-}
-
-.mapboxgl-ctrl-geocoder .suggestions>li>a {
-    color: var(--foreground) !important;
 }
 
 .mapboxgl-ctrl-geocoder .suggestions>.active>a,
 .mapboxgl-ctrl-geocoder .suggestions>li>a:hover {
-    background-color: var(--muted) !important;
-    color: var(--foreground) !important;
+    background-color: var(--muted);
+    color: var(--foreground);
+}
+
+.mapbox-container-custom .mapboxgl-map {
+    overflow: visible;
+}
+
+.mapboxgl-ctrl-geocoder .suggestions {
+    display: block;
+    z-index: 9999;
+    background-color: white;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+
+.mapboxgl-ctrl-geocoder {
+    overflow: visible;
+    z-index: 9999;
 }
