@@ -143,8 +143,6 @@ export const LocationSection = ({
                                     <Label htmlFor="mapbox-city">Ciudad *</Label>
                                     <Input
                                         id="mapbox-city"
-                                        placeholder="Autocompletado"
-                                        autoComplete="address-level2"
                                         {...register("city")}
                                         className="bg-muted/50"
                                     />
@@ -154,8 +152,6 @@ export const LocationSection = ({
                                     <Label htmlFor="mapbox-state">Departamento *</Label>
                                     <Input
                                         id="mapbox-state"
-                                        placeholder="Autocompletado"
-                                        autoComplete="address-level1"
                                         {...register("state")}
                                         className="bg-muted/50"
                                     />
