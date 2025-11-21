@@ -10,14 +10,13 @@ import { Label } from "@/components/ui/label";
 import dynamic from "next/dynamic";
 import { FormData } from "@/lib/schemas";
 
-// Importación dinámica del componente Mapbox (solo en cliente)
 const MapboxAddressInput = dynamic(
     () => import("./MapboxAddressInput"),
     {
         loading: () => (
             <p className="text-sm text-muted-foreground">Cargando mapa...</p>
         ),
-        ssr: false, // Mapbox solo funciona en cliente
+        ssr: false,
     }
 );
 
@@ -44,7 +43,6 @@ export const LocationSection = ({
             latitude: number;
             longitude: number;
         }) => {
-            console.log("Datos seleccionados:", data);
             setValue("address", data.address, { shouldDirty: true, shouldTouch: true });
             setValue("city", data.city, { shouldDirty: true, shouldTouch: true });
             setValue("state", data.state, { shouldDirty: true, shouldTouch: true });
@@ -58,7 +56,6 @@ export const LocationSection = ({
 
     return (
         <div className="pt-4 border-t border-border">
-            {/* Header */}
             <div className="flex items-center gap-2 mb-4">
                 <MapPin className="h-5 w-5 text-primary" />
                 <Label className="text-base font-semibold">
@@ -68,11 +65,8 @@ export const LocationSection = ({
                     {variant === "manual" ? "Entrada Manual" : "Autocompletado"}
                 </span>
             </div>
-
-            {/* Contenido según variante */}
             {variant === "manual" ? (
                 <div className="space-y-4">
-                    {/* Campo Dirección */}
                     <div className="space-y-2">
                         <Label htmlFor="address">Dirección *</Label>
                         <Input
@@ -88,8 +82,6 @@ export const LocationSection = ({
                             </p>
                         )}
                     </div>
-
-                    {/* Campos Ciudad y Departamento */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="space-y-2">
                             <Label htmlFor="city">Ciudad *</Label>
@@ -132,7 +124,6 @@ export const LocationSection = ({
                         </div>
                     ) : (
                         <div className="space-y-4">
-                            {/* Campo Dirección (Sincronizado con el mapa) */}
                             <div className="space-y-2">
                                 <Label htmlFor="mapbox-address">Dirección *</Label>
                                 <Input
@@ -153,8 +144,6 @@ export const LocationSection = ({
                                 onAddressSelect={handleAddressSelect}
                                 mapboxToken={mapboxToken}
                             />
-
-                            {/* Campos para ciudad y estado (autocompletados por Mapbox) */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div className="space-y-2">
                                     <Label htmlFor="mapbox-city">Ciudad *</Label>

@@ -16,7 +16,6 @@ const config: Config = {
       },
     },
     extend: {
-      // 👇 esto sí sigue siendo útil, no depende de @theme
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",

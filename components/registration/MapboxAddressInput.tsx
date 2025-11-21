@@ -40,7 +40,7 @@ const MapboxAddressInput = ({
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: "mapbox://styles/mapbox/streets-v12",
-      center: [-74.08175, 4.60971], // Default to Bogota
+      center: [-74.08175, 4.60971],
       zoom: 11,
     });
 
@@ -57,10 +57,10 @@ const MapboxAddressInput = ({
       const { result } = e;
       const [longitude, latitude] = result.geometry.coordinates;
 
-      // Normalize using the utility function
+
       const { city, state: rawState } = normalizeMapboxLocation({ features: [result] });
 
-      // Fallback rule: If state is empty, set it to city
+
       const state = rawState || city;
 
       const address = result.place_name || "";
