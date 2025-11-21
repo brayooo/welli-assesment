@@ -26,7 +26,7 @@ Esta sección cubre la configuración local, el despliegue y la estructura bási
 
 1. Clonar el repositorio:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/brayooo/welli-assesment.git
    cd technical-assesment-welli
    ```
 
@@ -99,7 +99,7 @@ Esta sección describe el flujo de automatización implementado para la segmenta
 
    ![Flujo de trabajo de n8n](public\n8n_nodes.png)
 
-> **Importante**: Las credenciales para acceder a la instancia de n8n se adjuntan en el correo electrónico enviado con el proyecto, por lo que no se incluyen en este repositorio.
+> **Importante**: Las credenciales para acceder a la instancia de n8n se encuentran en la carpeta `entregables` de este repositorio. Estas credenciales se comparten para permitir visualizar los flujos de trabajo implementados en n8n. Para ingresar a n8n, use la siguiente URL: https://n8n-service-fmha.onrender.com 
 
 ---
 
@@ -109,3 +109,14 @@ Esta sección describe el flujo de automatización implementado para la segmenta
 - `npm run build`: Construye la aplicación para producción.
 - `npm run start`: Inicia el servidor de producción.
 - `npm run lint`: Ejecuta ESLint para verificar la calidad del código.
+
+---
+
+## Entregables
+
+Dentro de la carpeta `entregables/` encontrarás todos los archivos requeridos para la evaluación.
+
+Esta carpeta incluye:
+
+- Las credenciales de n8n proporcionadas para la Fase 2.
+- El archivo Excel utilizado para la Fase 3.
