@@ -132,6 +132,23 @@ export const LocationSection = ({
                         </div>
                     ) : (
                         <div className="space-y-4">
+                            {/* Campo Dirección (Sincronizado con el mapa) */}
+                            <div className="space-y-2">
+                                <Label htmlFor="mapbox-address">Dirección *</Label>
+                                <Input
+                                    id="mapbox-address"
+                                    placeholder="Ingrese su dirección en el mapa"
+                                    {...register("address")}
+                                    className="bg-muted/50"
+                                    readOnly
+                                />
+                                {errors.address && (
+                                    <p className="text-sm text-destructive">
+                                        {errors.address.message}
+                                    </p>
+                                )}
+                            </div>
+
                             <MapboxAddressInput
                                 onAddressSelect={handleAddressSelect}
                                 mapboxToken={mapboxToken}

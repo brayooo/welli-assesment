@@ -9,6 +9,7 @@ import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 
 import "mapbox-gl/dist/mapbox-gl.css";
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
+import { normalizeMapboxLocation } from "@/lib/mapbox";
 
 interface MapboxAddressInputProps {
   onAddressSelect: (data: {
@@ -47,7 +48,7 @@ const MapboxAddressInput = ({
       accessToken: mapboxToken,
       mapboxgl: mapboxgl,
       marker: true,
-      countries: 'co', // Limit to Colombia
+      countries: 'co',
     });
 
     map.current.addControl(geocoder);
@@ -56,10 +57,13 @@ const MapboxAddressInput = ({
       const { result } = e;
       const [longitude, latitude] = result.geometry.coordinates;
 
-      const context = result.context || [];
-      const city = context.find((c: any) => c.id.startsWith('place'))?.text || "";
-      const state = context.find((c: any) => c.id.startsWith('region'))?.text || "";
-      const address = result.place_name || ""; // Or construct from properties
+      // Normalize using the utility function
+      const { city, state: rawState } = normalizeMapboxLocation({ features: [result] });
+
+      // Fallback rule: If state is empty, set it to city
+      const state = rawState || city;
+
+      const address = result.place_name || "";
 
       onAddressSelect({
         address,

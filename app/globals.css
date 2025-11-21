@@ -71,11 +71,9 @@
         --input: 210 20% 90%;
         --ring: 220 90% 56%;
 
-        --gradient-primary: linear-gradient(
-            135deg,
-            hsl(220 90% 56%),
-            hsl(180 85% 70%)
-        );
+        --gradient-primary: linear-gradient(135deg,
+                hsl(220 90% 56%),
+                hsl(180 85% 70%));
         --shadow-elegant: 0 10px 30px -10px hsl(220 90% 56% / 0.2);
         --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
@@ -140,4 +138,54 @@
     body {
         @apply bg-background text-foreground;
     }
+}
+
+/* Mapbox Geocoder Custom Styles */
+.mapboxgl-ctrl-geocoder {
+    width: 100% !important;
+    max-width: none !important;
+    box-shadow: 0 0 0 1px var(--border) !important;
+    border-radius: var(--radius) !important;
+    background-color: #ffffff !important;
+}
+
+.mapboxgl-ctrl-geocoder--input {
+    height: 2.5rem !important;
+    padding: 0.5rem 2.5rem !important;
+    color: var(--foreground) !important;
+    background-color: #ffffff !important;
+    /* Ensure input itself is white */
+}
+
+.mapboxgl-ctrl-geocoder--icon-search {
+    top: 0.5rem !important;
+    left: 0.75rem !important;
+    fill: var(--muted-foreground) !important;
+    z-index: 10;
+    /* Ensure icon is on top */
+}
+
+.suggestions-wrapper {
+    border: 1px solid var(--border);
+    border-top: none;
+    border-radius: 0 0 var(--radius) var(--radius);
+    overflow: hidden;
+    background-color: #ffffff !important;
+    position: absolute;
+    width: 100%;
+    z-index: 50;
+}
+
+.mapboxgl-ctrl-geocoder .suggestions {
+    background-color: #ffffff !important;
+}
+
+.mapboxgl-ctrl-geocoder .suggestions>li>a {
+    color: var(--foreground) !important;
+}
+
+.mapboxgl-ctrl-geocoder .suggestions>.active>a,
+.mapboxgl-ctrl-geocoder .suggestions>li>a:hover {
+    background-color: var(--muted) !important;
+    color: var(--foreground) !important;
 }
