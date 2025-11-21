@@ -1,36 +1,98 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Evaluación Técnica - Welli
 
-## Getting Started
+Esta es una aplicación Next.js construida para la evaluación técnica de Welli. Cuenta con un formulario de registro de leads con pruebas A/B para la entrada de ubicación (Manual vs. Mapbox) y un panel para ver los leads registrados.
 
-First, run the development server:
+## Tecnologías
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Framework**: [Next.js 15](https://nextjs.org/) (App Router)
+- **Lenguaje**: TypeScript
+- **Estilos**: Tailwind CSS, Shadcn/UI
+- **Base de Datos**: Supabase (PostgreSQL)
+- **Mapas**: Mapbox GL JS
+- **Formularios**: React Hook Form, Zod
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Fase 1: Configuración y Uso de la Aplicación
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Esta sección cubre la configuración local, el despliegue y la estructura básica de la aplicación.
 
-## Learn More
+### Requisitos Previos
 
-To learn more about Next.js, take a look at the following resources:
+- Node.js 18+
+- npm o yarn
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Instalación
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Clonar el repositorio:
+   ```bash
+   git clone <repository-url>
+   cd technical-assesment-welli
+   ```
 
-## Deploy on Vercel
+2. Instalar dependencias:
+   ```bash
+   npm install
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. Configurar variables de entorno:
+   Crea un archivo `.env.local` en el directorio raíz y agrega lo siguiente:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+   ```env
+   NEXT_PUBLIC_SUPABASE_URL=tu_supabase_url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=tu_supabase_anon_key
+   NEXT_PUBLIC_MAPBOX_TOKEN=tu_mapbox_token
+   ```
+
+4. Ejecutar el servidor de desarrollo:
+   ```bash
+   npm run dev
+   ```
+
+   Abre [http://localhost:3000](http://localhost:3000) en tu navegador.
+
+### Rutas de la Aplicación
+
+La aplicación cuenta con las siguientes rutas principales:
+
+- **/form**: Ruta donde se encuentra el formulario de creación de leads. Aquí los usuarios pueden registrar su información.
+- **/users**: Ruta donde se visualiza la lista de usuarios/leads almacenados en la base de datos.
+
+### Base de Datos (Supabase)
+
+El proyecto utiliza **Supabase (PostgreSQL)** como capa principal de persistencia.
+
+> **Nota**: No se utilizó una base de datos local debido a la configuración de triggers requerida para la Fase 2, la cual depende de un entorno de base de datos alojado y accesible para la automatización.
+
+### Despliegue
+
+Despliegue: [el enlace se agregará aquí]
+
+---
+
+## Fase 2: Automatización con Triggers de Postgres y n8n
+
+Esta sección describe el flujo de automatización implementado para la segmentación de leads.
+
+### Flujo de Automatización
+
+1. **Inserción en Base de Datos**: Cuando un nuevo lead completa el formulario en `/form`, los datos se insertan en la tabla de Supabase.
+2. **Ejecución del Trigger**: Una función trigger de Postgres se ejecuta automáticamente tras la inserción.
+
+   ![Diagrama del trigger de Postgres](<ADD_TRIGGER_IMAGE_HERE>)
+
+3. **Notificación a n8n**: El trigger notifica a un webhook de n8n para iniciar el proceso de segmentación.
+4. **Procesamiento en n8n**: n8n recibe los datos, procesa la información y realiza la segmentación del lead (ej. asignando un segmento basado en el ticket promedio o ubicación).
+
+   ![Flujo de trabajo de n8n](<ADD_N8N_IMAGE_HERE>)
+
+> **Importante**: Las credenciales para acceder a la instancia de n8n se adjuntan en el correo electrónico enviado con el proyecto, por lo que no se incluyen en este repositorio.
+
+---
+
+## Scripts Disponibles
+
+- `npm run dev`: Inicia el servidor de desarrollo.
+- `npm run build`: Construye la aplicación para producción.
+- `npm run start`: Inicia el servidor de producción.
+- `npm run lint`: Ejecuta ESLint para verificar la calidad del código.
