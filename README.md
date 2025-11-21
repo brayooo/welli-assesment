@@ -92,12 +92,12 @@ Esta sección describe el flujo de automatización implementado para la segmenta
 1. **Inserción en Base de Datos**: Cuando un nuevo lead completa el formulario en `/form`, los datos se insertan en la tabla de Supabase.
 2. **Ejecución del Trigger**: Una función trigger de Postgres se ejecuta automáticamente tras la inserción.
 
-   ![Diagrama del trigger de Postgres](public\webhook-db.png)
+   ![Diagrama del trigger de Postgres](public/webhook-db.png)
 
 3. **Notificación a n8n**: El trigger notifica a un webhook de n8n para iniciar el proceso de segmentación.
 4. **Procesamiento en n8n**: n8n recibe los datos, procesa la información y realiza la segmentación del lead (ej. asignando un segmento basado en el ticket promedio o ubicación).
 
-   ![Flujo de trabajo de n8n](public\n8n_nodes.png)
+   ![Flujo de trabajo de n8n](public/n8n_nodes.png)
 
 > **Importante**: Las credenciales para acceder a la instancia de n8n se encuentran en la carpeta `entregables` de este repositorio. Estas credenciales se comparten para permitir visualizar los flujos de trabajo implementados en n8n. Para ingresar a n8n, use la siguiente URL: https://n8n-service-fmha.onrender.com 
 
